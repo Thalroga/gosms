@@ -134,8 +134,7 @@ func processMessages(modem *modem.GSMModem) {
 	defer func() {
 		log.Println("--- deferring ProcessMessage")
 	}()
-
-	//log.Println("--- ProcessMessage")
+	
 	for {
 		message := <-messages
 		log.Println("processing: ", message.UUID, modem.DeviceId)
