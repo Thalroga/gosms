@@ -1,10 +1,11 @@
 package gosms
 
 import (
-	"github.com/haxpax/gosms/modem"
 	"log"
 	"strings"
 	"time"
+
+	"github.com/Thalroga/gosms/modem"
 )
 
 //TODO: should be configurable
@@ -134,12 +135,16 @@ func processMessages(modem *modem.GSMModem) {
 	defer func() {
 		log.Println("--- deferring ProcessMessage")
 	}()
-	
+
 	for {
 		message := <-messages
 		log.Println("processing: ", message.UUID, modem.DeviceId)
 
 		status := modem.SendSMS(message.Mobile, message.Body)
+
+		log.Println(strings.HasSuffix(status, "OK\r\n"))
+		log.Println("Estatus de Mensaje: ", status)
+
 		if strings.HasSuffix(status, "OK\r\n") {
 			message.Status = SMSProcessed
 		} else if strings.HasSuffix(status, "ERROR\r\n") {

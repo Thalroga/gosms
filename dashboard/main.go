@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/haxpax/gosms"
-	"github.com/haxpax/gosms/modem"
 	"log"
 	"os"
 	"strconv"
+
+	"github.com/Thalroga/gosms"
+	"github.com/Thalroga/gosms/modem"
 )
 
 func main() {
@@ -14,19 +15,19 @@ func main() {
 	log.Println("main: ", "Initializing gosms")
 	//load the config, abort if required config is not preset
 	appConfig, err := gosms.GetConfig("conf.ini")
-	
+
 	if err != nil {
 		log.Println("main: ", "Invalid config: ", err.Error(), " Aborting")
 		os.Exit(1)
 	}
 
 	db, err := gosms.InitDB("sqlite3", "db.sqlite")
-	
+
 	if err != nil {
 		log.Println("main: ", "Error initializing database: ", err, " Aborting")
 		os.Exit(1)
 	}
-	
+
 	defer db.Close()
 
 	serverhost, _ := appConfig.Get("SETTINGS", "SERVERHOST")

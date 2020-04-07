@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="assets/favicon.ico">
-    <title>Plataforma de Mensajeria</title>
+    <title>Go SMS</title>
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -31,8 +31,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="title">Plataforma de Mensajeria</h1>
-            <p>Desarrollo basado en GOSMS y adecuado por la gerencia de Informatica</p>
+            <h1 class="title">gosms</h1>
+            <p>Send text messages via modem</p>
         </div>
     </div>
     <div class="row">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="col-md-4 sidebar">
-            <h4>Enviar Mensaje</h4>
+            <h4>Try sending an SMS</h4>
             <form name="testSMS" id="testSMS" action="/api/sms/" method="POST">
                 <div class="form-group">
                     <label for="mobile">Mobile</label>
@@ -67,16 +67,16 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h4>Historico de Mensajes</h4>
+            <h4>SMS Logs</h4>
             <div class="table-responsive">
                 <table class="table" id="smsdata">
                     <thead>
                     <tr>
-                        <th>Telefono</th>
-                        <th>Mensaje</th>
-                        <th>Estatus</th>
-                        <th>Enviado el Dia</th>
-                        <th>Estatus Actualizado el dia</th>
+                        <th>mobile</th>
+                        <th>message</th>
+                        <th>status</th>
+                        <th>created at</th>
+                        <th>last update</th>
                     </tr>
                     </thead>
                     <tbody></tbody>

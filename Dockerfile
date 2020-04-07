@@ -11,15 +11,15 @@ ENV PATH /usr/local/go/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bi
 ENV GOPATH /go
 ENV GOROOT /usr/local/go
 
-RUN go get github.com/haxpax/gosms
+RUN go get github.com/Thalroga/gosms
 
-ADD . /go/src/github.com/haxpax/gosms
+ADD . /go/src/github.com/Thalroga/gosms
 
-WORKDIR /go/src/github.com/haxpax/gosms
+WORKDIR /go/src/github.com/Thalroga/gosms
 RUN go get
 
-WORKDIR /go/src/github.com/haxpax/gosms/dashboard
-RUN go install github.com/haxpax/gosms/dashboard
+WORKDIR /go/src/github.com/Thalroga/gosms/dashboard
+RUN go install github.com/Thalroga/gosms/dashboard
 
 EXPOSE 8951
 

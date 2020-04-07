@@ -1,26 +1,25 @@
 package main
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/haxpax/gosms"
-	"github.com/gorilla/mux"
-	"github.com/google/uuid"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
 	"strings"
-	"encoding/base64"
+
+	"github.com/Thalroga/gosms"
+	"github.com/google/uuid"
+	"github.com/gorilla/mux"
 )
 
-//reposne structure to /sms
 type SMSResponse struct {
 	Status  int    `json:"status"`
 	Message string `json:"message"`
 }
 
-//response structure to /smsdata/
 type SMSDataResponse struct {
 	Status   int            `json:"status"`
 	Message  string         `json:"message"`
@@ -40,10 +39,13 @@ var authPassword string
 // dashboard
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("--- indexHandler")
-	// templates.ExecuteTemplate(w, "index.html", nil)
-	// Use during development to avoid having to restart server
-	// after every change in HTML
 	t, _ := template.ParseFiles("./templates/index.html")
+	t.Execute(w, nil)
+}
+
+func smsMasivoHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("--- indexHandler")
+	t, _ := template.ParseFiles("./templates/smsMasivo.html")
 	t.Execute(w, nil)
 }
 
@@ -117,6 +119,7 @@ func InitServer(host string, port string, username string, password string) erro
 	r.StrictSlash(true)
 
 	r.HandleFunc("/", use(indexHandler, basicAuth))
+	r.HandleFunc("/smsmasivo", use(smsMasivoHandler, basicAuth))
 
 	// handle static files
 	r.HandleFunc(`/assets/{path:[a-zA-Z0-9=\-\/\.\_]+}`, use(handleStatic, basicAuth))
@@ -127,6 +130,7 @@ func InitServer(host string, port string, username string, password string) erro
 	api.Methods("POST").Path("/sms/").HandlerFunc(use(sendSMSHandler, basicAuth))
 
 	http.Handle("/", r)
+	http.Handle("/smsmasivo", r)
 
 	bind := fmt.Sprintf("%s:%s", host, port)
 	log.Println("listening on: ", bind)
