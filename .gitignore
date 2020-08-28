@@ -26,3 +26,5 @@ _testmain.go
 # sqlite database
 *.sqlite
 
+.vscode/settings.json
+dashboard/conf.ini
