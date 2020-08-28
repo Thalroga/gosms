@@ -150,7 +150,7 @@ func processMessages(modem *modem.GSMModem) {
 		} else if strings.HasSuffix(status, "ERROR\r\n") {
 			message.Status = SMSError
 		} else {
-			message.Status = SMSPending
+			message.Status = SMSProcessed
 		}
 		message.Device = modem.DeviceId
 		message.Retries++
